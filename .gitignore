@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 
 AVHProject
+avhdecomp
+Assembly-CSharp.dll
