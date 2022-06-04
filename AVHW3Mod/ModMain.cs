@@ -8,7 +8,8 @@ global using System.Reflection;
 global using System.Collections.Generic;
 global using static AVHWarMod.ModMain;
 global using UnityEngine.UI;
-[assembly:MelonInfo(typeof(AVHWarMod.ModMain),"AVHWarMod","1.0.0","Silentstorm")]
+global using AVHWarMod;
+[assembly:MelonInfo(typeof(ModMain),"AVHWarMod","1.0.0","Silentstorm")]
 [assembly:MelonGame("Sayan","Apes vs Helium")]
 namespace AVHWarMod{
     public class ModMain:MelonMod{
@@ -60,10 +61,8 @@ namespace AVHWarMod{
                 return true;
             }
         }
-        [HarmonyPatch(typeof(UnityStandardAssets.Characters.FirstPerson.FirstPersonController),"Start")]
-        public class FirstPersonControllerStart_Patch{
-            [HarmonyPostfix]
-            public static void Postfix(){
+        public override void OnSceneWasInitialized(int buildIndex,string sceneName){
+            if(sceneName!="MainMenu"){
                 Currency.instance.UpdateCurrency(99999);
                 foreach(UpgradeButtonScript ubs in Resources.FindObjectsOfTypeAll<UpgradeButtonScript>()){
                     if(ubs.upgradeName=="Monkey Ace"){
@@ -83,11 +82,19 @@ namespace AVHWarMod{
                                 newubs.GetComponent<RectTransform>().position=new Vector3(newubs.GetComponent<RectTransform>().position.x+440,newubs.GetComponent<RectTransform>().position.y,
                                     newubs.GetComponent<RectTransform>().position.z);
                                 bundle.Unload(false);
+                                EquipmentScript.instance.PurchaseEquipment(customUpgrade.Value.Name,"cock");
                             }
                         }
                         break;
                     }
                 }
+            }
+        }
+        [HarmonyPatch(typeof(FollowerWeaponScript),nameof(FollowerWeaponScript.AttackTarget))]
+        public class test{
+            [HarmonyPostfix]
+            public static void Postfix(){
+                Log("test");
             }
         }
     }

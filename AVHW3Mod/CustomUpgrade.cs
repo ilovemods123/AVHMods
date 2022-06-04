@@ -1,5 +1,5 @@
 ﻿namespace AVHWarMod{
-    public abstract class CustomUpgrade{
+    public abstract class CustomUpgrade:MonoBehaviour{
         public virtual string Name=>"";
         public virtual int Cost=>int.MaxValue;
         public virtual byte[]Bundle=>null;
