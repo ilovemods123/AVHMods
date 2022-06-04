@@ -23,33 +23,37 @@ namespace avhdeflation{
             Log("Deflation Loaded!");
         }
         [HarmonyPatch(typeof(Currency),"Start")]
-        public class test{
+        public class CurrencyStart_Patch{
             [HarmonyPrefix]
-            public static bool Prefix(Currency __instance){
-		        if(GameManagerScript.instance.difficultyLevel == GameManagerScript.DifficultyLevel.easy){
-			        __instance.currency = 10000;
-			        this.currencyText.text = "$" + this.currency.ToString();
+            public static bool Prefix(ref Currency __instance){
+		        if(GameManagerScript.instance.difficultyLevel==GameManagerScript.DifficultyLevel.easy){
+			        __instance.UpdateCurrency(10000);
 			        return false;
 		        }
-		        if (this.gameManagerScript.difficultyLevel == GameManagerScript.DifficultyLevel.medium)
-		        {
-			        this.currency = 15000;
-			        this.currencyText.text = "$" + this.currency.ToString();
+		        if(GameManagerScript.instance.difficultyLevel==GameManagerScript.DifficultyLevel.medium){
+                    __instance.UpdateCurrency(15000);
 			        return false;
 		        }
-		        if (this.gameManagerScript.difficultyLevel == GameManagerScript.DifficultyLevel.hard)
-		        {
-			        this.currency = 20000;
-			        this.currencyText.text = "$" + this.currency.ToString();
+		        if(GameManagerScript.instance.difficultyLevel==GameManagerScript.DifficultyLevel.hard){
+			        __instance.UpdateCurrency(20000);
 			        return false;
 		        }
-		        if (this.gameManagerScript.difficultyLevel == GameManagerScript.DifficultyLevel.impoppable)
-		        {
-			        this.currency = 40000;
-			        this.currencyText.text = "$" + this.currency.ToString();
+		        if(GameManagerScript.instance.difficultyLevel==GameManagerScript.DifficultyLevel.impoppable){
+			        __instance.UpdateCurrency(40000);
                     return false;
 		        }
                 return true;
+            }
+        }
+        [HarmonyPatch(typeof(Currency),"UpdateCurrency")]
+        public class CurrencyUpdateCurrency_Patch{
+            public static bool PrefixRan=false;
+            [HarmonyPrefix]
+            public static void Prefix(ref int amount){
+                if(PrefixRan==true){
+                    amount=0;
+                }
+                PrefixRan=true;
             }
         }
     }
