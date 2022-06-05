@@ -1,6 +1,6 @@
 ﻿using MelonLoader;
 using HarmonyLib;
-[assembly:MelonInfo(typeof(DoubleCash.ModMain),"DoubleCash","1.0.0","Silentstorm")]
+[assembly:MelonInfo(typeof(DoubleCash.ModMain),"DoubleCash","1.0.1","Silentstorm")]
 [assembly:MelonGame("Sayan","Apes vs Helium")]
 namespace DoubleCash{
     public class ModMain:MelonMod{
@@ -26,7 +26,9 @@ namespace DoubleCash{
         public class CurrencyUpdateCurrency_Patch{
             [HarmonyPrefix]
             public static void Prefix(ref int amount){
-                amount=amount*2;
+                if(amount>0){
+                    amount=amount*2;
+                }
             }
         }
     }
