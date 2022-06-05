@@ -7,8 +7,8 @@
     <ProjectGuid>{C14CC899-473B-4CAD-8190-CB4FD9B18A59}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>avhtemplate</RootNamespace>
-    <AssemblyName>avhtemplate</AssemblyName>
+    <RootNamespace>avhcustomupgradetest</RootNamespace>
+    <AssemblyName>avhcustomupgradetest</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -39,6 +39,9 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>F:\AVH\Apes vs Helium_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="CustomUpgrades">
+      <HintPath>F:\AVH\Mods\CustomUpgrades.dll</HintPath>
     </Reference>
     <Reference Include="MelonLoader">
       <HintPath>F:\AVH\MelonLoader\MelonLoader.dll</HintPath>

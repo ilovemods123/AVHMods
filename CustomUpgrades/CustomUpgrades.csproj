@@ -7,8 +7,8 @@
     <ProjectGuid>{C14CC899-473B-4CAD-8190-CB4FD9B18A59}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>avhtemplate</RootNamespace>
-    <AssemblyName>avhtemplate</AssemblyName>
+    <RootNamespace>CustomUpgrades</RootNamespace>
+    <AssemblyName>CustomUpgrades</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -56,12 +56,19 @@
       <HintPath>F:\AVH\Apes vs Helium_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>F:\AVH\Apes vs Helium_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>F:\AVH\Apes vs Helium_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>F:\AVH\Apes vs Helium_Data\Managed\UnityEngine.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomUpgrade.cs" />
     <Compile Include="ModMain.cs" />
   </ItemGroup>
   <ItemGroup>
