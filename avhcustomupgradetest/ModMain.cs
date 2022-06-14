@@ -26,6 +26,10 @@ namespace avhcustomupgradetest{
         public class test:CustomUpgrade{
             public override string Name=>"test";
             public override int Cost=>100;
+            public override string Type=>"Support";
+            public override void OnStart(){
+                Log(Name);
+            }
         }
     }
 }

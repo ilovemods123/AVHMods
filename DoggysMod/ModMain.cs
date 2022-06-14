@@ -4,6 +4,8 @@ using MelonLoader;
 using HarmonyLib;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityStandardAssets.Utility;
+
 [assembly:MelonInfo(typeof(DoggysMod.ModMain),"Doggy's Mod","1.0.0","idfk")]
 [assembly:MelonGame("Sayan","Apes vs Helium")]
 namespace DoggysMod{
@@ -54,14 +56,27 @@ namespace DoggysMod{
         public class FirstPersonControllerGetInput_Patch{
             [HarmonyPrefix]
             public static bool Prefix(ref FirstPersonController __instance,ref float speed){
-			    if (MyGUIClass.movementSpeed != 0f){
-				    speed = MyGUIClass.movementSpeed;
-			    }
-			    if (MyGUIClass.resetSmovementSpeed)
-			    {
-				    speed = ((bool)__instance.GetPrivateValue("m_IsWalking") ? (float)__instance.GetPrivateValue("m_WalkSpeed") : (float)__instance.GetPrivateValue("m_RunSpeed"));
-			    }
-                return true;
+                float axis=CrossPlatformInputManager.GetAxis("Horizontal");
+	            float axis2=CrossPlatformInputManager.GetAxis("Vertical");
+	            bool isWalking=(bool)__instance.GetPrivateValue("m_IsWalking");
+	            speed=(bool)__instance.GetPrivateValue("m_IsWalking")?(float)__instance.GetPrivateValue("m_WalkSpeed"):(float)__instance.GetPrivateValue("m_RunSpeed");
+                if(MyGUIClass.movementSpeed!=0){
+                    speed=MyGUIClass.movementSpeed;
+                }
+                __instance.SetPrivateValue("m_Input",new Vector2(axis,axis2));
+                Vector2 inputVector=(Vector2)__instance.GetPrivateValue("m_Input");
+                bool UseFovKick=(bool)__instance.GetPrivateValue("m_UseFovKick");
+                FOVKick fovKick=(FOVKick)__instance.GetPrivateValue("m_FovKick");
+                CharacterController charController=(CharacterController)__instance.GetPrivateValue("m_CharacterController");
+	            if(inputVector.sqrMagnitude>1f){
+		            inputVector.Normalize();
+	            }
+	            if(UseFovKick&&charController.velocity.sqrMagnitude>0f)
+	            {
+		            __instance.StopAllCoroutines();
+		            __instance.StartCoroutine((!isWalking)?fovKick.FOVKickUp():fovKick.FOVKickDown());
+	            }
+                return false;
             }
         }
     }

@@ -7,8 +7,8 @@
     <ProjectGuid>{C14CC899-473B-4CAD-8190-CB4FD9B18A59}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CustomUpgrades</RootNamespace>
-    <AssemblyName>CustomUpgrades</AssemblyName>
+    <RootNamespace>Viking</RootNamespace>
+    <AssemblyName>Viking</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -24,15 +24,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>embedded</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
-    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
@@ -42,6 +39,9 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>F:\AVH\Apes vs Helium_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="CustomUpgrades">
+      <HintPath>F:\AVH\Mods\CustomUpgrades.dll</HintPath>
     </Reference>
     <Reference Include="MelonLoader">
       <HintPath>F:\AVH\MelonLoader\MelonLoader.dll</HintPath>
@@ -55,33 +55,59 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>F:\AVH\Apes vs Helium_Data\Managed\Unity.TextMeshPro.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>F:\AVH\Apes vs Helium_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>F:\AVH\Apes vs Helium_Data\Managed\UnityEngine.AnimationModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
       <HintPath>F:\AVH\Apes vs Helium_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>F:\AVH\Apes vs Helium_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>F:\AVH\Apes vs Helium_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>F:\AVH\Apes vs Helium_Data\Managed\UnityEngine.UI.dll</HintPath>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>F:\AVH\Apes vs Helium_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UIModule">
-      <HintPath>F:\AVH\Apes vs Helium_Data\Managed\UnityEngine.UIModule.dll</HintPath>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>F:\AVH\Apes vs Helium_Data\Managed\UnityEngine.InputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>F:\AVH\Apes vs Helium_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>F:\AVH\Apes vs Helium_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomUpgrade.cs" />
+    <Compile Include="Bundles.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Bundles.resx</DependentUpon>
+    </Compile>
     <Compile Include="ModMain.cs" />
+    <Compile Include="Viking\VikingAirScript.cs" />
+    <Compile Include="Viking\VikingGroundScript.cs" />
+    <Compile Include="Viking\VikingRootScript.cs" />
+    <Compile Include="Viking\VikingTransformScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Bundles.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Bundles.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Bundles\viking.bundle" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -19,7 +19,6 @@ namespace DoggysMod{
 		public static string livesString;
 		public static string speedString;
 		public static float movementSpeed;
-		public static bool resetSmovementSpeed;
 		public static bool noknockback;
 		public void OnGUI(){
 			GUILayout.BeginHorizontal(Array.Empty<GUILayoutOption>());
@@ -72,7 +71,7 @@ namespace DoggysMod{
 		}
 		public static void WindowUI1(int windowID){
 			GUILayout.BeginHorizontal(Array.Empty<GUILayoutOption>());
-			if(GUILayout.Button("Change Money to",Array.Empty<GUILayoutOption>())){
+			if(GUILayout.Button("Add Money to",Array.Empty<GUILayoutOption>())){
 				int number=0;
 				if(int.TryParse(currencyString,out number)){
 					changeMoney(number);
@@ -81,7 +80,7 @@ namespace DoggysMod{
 			currencyString=GUILayout.TextField(currencyString,Array.Empty<GUILayoutOption>());
 			GUILayout.EndHorizontal();
 			GUILayout.BeginHorizontal(Array.Empty<GUILayoutOption>());
-			if(GUILayout.Button("Change Lives to",Array.Empty<GUILayoutOption>())){
+			if(GUILayout.Button("Add Lives to",Array.Empty<GUILayoutOption>())){
 				int number2=0;
 				if(int.TryParse(livesString,out number2)){
 					changeLives(number2);
@@ -90,7 +89,7 @@ namespace DoggysMod{
 			livesString=GUILayout.TextField(livesString,Array.Empty<GUILayoutOption>());
 			GUILayout.EndHorizontal();
 			GUILayout.BeginHorizontal(Array.Empty<GUILayoutOption>());
-			if(GUILayout.Button("Change Speed to",Array.Empty<GUILayoutOption>())){
+			if(GUILayout.Button("Change speed to",Array.Empty<GUILayoutOption>())){
 				int num=0;
 				if(int.TryParse(speedString,out num)){
 					movementSpeed=num;
@@ -99,14 +98,7 @@ namespace DoggysMod{
 			speedString=GUILayout.TextField(speedString,Array.Empty<GUILayoutOption>());
 			GUILayout.EndHorizontal();
 			GUILayout.BeginHorizontal(Array.Empty<GUILayoutOption>());
-			if(resetSmovementSpeed){
-				GUI.backgroundColor=Color.green;
-			}else{
-				GUI.backgroundColor=Color.grey;
-			}
-			if(GUILayout.Button("Reset Speed",Array.Empty<GUILayoutOption>())){
-				resetSmovementSpeed=!resetSmovementSpeed;
-			}
+			GUI.backgroundColor=Color.grey;
 			GUILayout.EndHorizontal();
 			GUILayout.BeginHorizontal(Array.Empty<GUILayoutOption>());
 			if(noknockback){
@@ -133,7 +125,7 @@ namespace DoggysMod{
 			GUI.DragWindow();
 		}
 		public static void changeMoney(int number){
-			Currency.instance.UpdateCurrency(number);
+			Currency.instance.UpdateCurrency(number,false);
 		}
 		public static void changeLives(int number){
 			PlayerHealth.instance.UpdateHealth(number);
