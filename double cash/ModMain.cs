@@ -27,7 +27,7 @@ namespace DoubleCash{
             [HarmonyPrefix]
             public static void Prefix(ref int amount){
                 if(amount>0){
-                    amount=amount*2;
+                    amount=amount*4;
                 }
             }
         }
